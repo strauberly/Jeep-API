@@ -18,7 +18,7 @@ I begin my documentation.
 -14 Apr 2022-
 
 Began building out the project utilizing the provided instructions and starter files.
-Looking forward to it.
+Looking forward to it!
 
 
 
