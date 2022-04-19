@@ -2,11 +2,11 @@
 
 ---
 
-I am continuing to improve my skills in creating RESTFUL API'sand so so this project created by Promineo Tech.
+I am continuing to improve my skills in creating RESTFUL API's and so 
+I am taking on this project created by Promineo Tech.
 
 They have been kind enough to provide the instruction and starter
-files and I am very excited to combine what I have learned here and in another course to create an APi for my 
-fictional taco shop project.
+files, and I am very excited to combine what I learn here with other projects I have created.
 
 This file will serve as my Dev journal until 
 I begin my documentation.
@@ -15,10 +15,26 @@ I begin my documentation.
 
 ---
 
+-18 Apr 2022-
+
+Implemented API documentation with Swagger. Created controllers and mapped them to 
+end point.
+
+
+
+---
+-15 Apr 2022-
+
+Set up test environment for http requests, and discussed 
+behavior driven development and test driven development. Discussed testing cycle
+of black, red, green, concepts. Began testing queries.
+---
 -14 Apr 2022-
 
 Began building out the project utilizing the provided instructions and starter files.
 Looking forward to it!
 
+===
+===
 
 
