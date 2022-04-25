@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import java.util.List;
 @RequestMapping("/jeeps")
 @OpenAPIDefinition(info = @Info(title = "Jeep Sales Service"),
-        servers = {@Server(url= "http://localhost:8800", description = "Local server.")})
+        servers = {@Server(url= "http://localhost:8080", description = "Local server.")})
 
 public interface JeepSalesController {
     @Operation(
