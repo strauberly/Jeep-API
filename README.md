@@ -15,13 +15,34 @@ I begin my documentation.
 
 ---
 
+-24 Apr 2022-
+
+- Discussed spring mapping based on component scan and implemented logger with Lombok @Slf4j as
+an info logger.
+Intending to research more for connections
+to l4J.
+
+- Implemented debug logger.
+
+- Altered test to expect a list of jeep objects which it currently fails as expected.
+- Created yaml file for debug configuration
+- Discussed need for arg constructors when implementing spring builder
+- Discussed dependency injection and inversion of control
+- Discussed interface driven development and benefits.
+- Talked about definitions of controller , service and DAO layers
+- How @Autowired is needed for injection and that it requires a bean or managed object instance
+- Discussed DAO a bit more JDBC, connection pools and transaction managers.
+- Added mysql driver and jdbc driver to pom and added to our yaml configuration file.
+
+
+
+
+---
+
 -18 Apr 2022-
 
 Implemented API documentation with Swagger. Created controllers and mapped them to 
 end point.
-
-
-
 ---
 -15 Apr 2022-
 
