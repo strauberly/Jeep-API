@@ -19,6 +19,7 @@ import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.aspectj.bridge.MessageUtil.fail;
 
@@ -39,7 +40,7 @@ class FetchJeepTest  extends FetchJeepTestSupport {
         System.out.println("num= " + numrows);
     }
 
-    @Disabled
+
     @Test
     void testThatJeepsAreReturnedWhenValidModelAndTrimSupplied(){
         System.out.println(getBaseUri());
@@ -48,8 +49,8 @@ class FetchJeepTest  extends FetchJeepTestSupport {
         JeepModel model = JeepModel.WRANGLER;
         String trim = "Sport";
         String uri =
-                String.format("http://localhost:%d/jeeps?model=%s&trim=%s", getServerPort(), model, trim);
-//                String.format("%s?model=%s$trim=%s",getBaseUri(),model,trim);
+                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+//
         System.out.println(uri);
 
 
@@ -62,7 +63,68 @@ class FetchJeepTest  extends FetchJeepTestSupport {
 //        Then: a success (OK-200) status code is returned
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 //        And: the actual list returned is the same as the expected list.
+    List<Jeep> actual = response.getBody();
     List<Jeep> expected = buildExpected();
-        assertThat(response.getBody()).isEqualTo(expected);
+    assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    void testThatErrorReturnedWhenInvalidTrimSupplied(){
+        System.out.println(getBaseUri());
+
+//        Given: a valid model, trim and URI
+        JeepModel model = JeepModel.WRANGLER;
+        String trim = "Invalid Trim";
+        String uri =
+                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+//
+        System.out.println(uri);
+
+//        When: a connection is made to the URI
+        ResponseEntity<Map<String, Object>> response = getRestTemplate()
+                .exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+
+//        Then: a not found(404) status code is returned
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+//        And: an error message is returned.
+        Map<String, Object> error = response.getBody();
+
+        assertThat(error)
+                .containsKey("message")
+                .containsEntry("status code", HttpStatus.NOT_FOUND.value())
+                .containsEntry("uri", "/jeeps")
+                .containsKey("timestamp")
+                .containsEntry("reason",HttpStatus.NOT_FOUND.getReasonPhrase());
+
+    }
+
+//    @Test
+//    void testThatJeepsAreReturnedWhenValidModelAndTrimSupplied(){
+//        System.out.println(getBaseUri());
+//
+////        Given: a valid model, trim and URI
+//        JeepModel model = JeepModel.WRANGLER;
+//        String trim = "Sport";
+//        String uri =
+//                String.format("http://localhost:%d/jeeps?model=%s&trim=%s", getServerPort(), model, trim);
+////                String.format("%s?model=%s$trim=%s",getBaseUri(),model,trim);
+//        System.out.println(uri);
+//
+//
+//
+////        When: a connection is made to the URI
+//        ResponseEntity<List<Jeep>> response =
+//                getRestTemplate().exchange(uri, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
+//                });
+//
+////        Then: a success (OK-200) status code is returned
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+////        And: the actual list returned is the same as the expected list.
+//        List<Jeep> actual = response.getBody();
+//        List<Jeep> expected = buildExpected();
+//
+//        actual.forEach(jeep -> jeep.setModelPK(null));
+//
+//        assertThat(actual).isEqualTo(expected);
+//    }
 }

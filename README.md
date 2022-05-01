@@ -14,6 +14,14 @@ I begin my documentation.
 ### Thank you for checking out what I am working on!
 
 ---
+-30 Apr 2022-
+
+- Created Global Error Handler.
+- Created DOA layer.
+- Implemented a comparator for testing valid input in the trim selection,
+ as well as creating a test that will return error message.
+
+---
 
 -24 Apr 2022-
 
