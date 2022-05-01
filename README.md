@@ -14,6 +14,21 @@ I begin my documentation.
 ### Thank you for checking out what I am working on!
 
 ---
+
+-1 May 2022-
+
+- Created parameterized test checking for length of input,
+validation for character type and object type.
+- Turned on bean validation.
+- added validation error handlers to the global error handler.
+- Intro to mocking w Mockito.
+- added test for unplanned error. Unplanned errors print stack trace.
+- created inner test classes w @Nested allows for unpolluted bean registry.
+- Completed all four outcomes for a request through controller.
+- First operation completed.
+---
+
+---
 -30 Apr 2022-
 
 - Created Global Error Handler.
