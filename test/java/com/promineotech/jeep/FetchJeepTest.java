@@ -3,7 +3,6 @@ import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.service.JeepSalesService;
 import com.promineotech.jeep.testsupport.FetchJeepTestSupport;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +21,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
-import org.springframework.test.jdbc.JdbcTestUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -48,13 +46,13 @@ class FetchJeepTest {
 
     @Test
     void testThatJeepsAreReturnedWhenValidModelAndTrimSupplied() {
-        System.out.println(getBaseUri());
+        System.out.println(getBaseUriForJeeps());
 
 //        Given: a valid model, trim and URI
         JeepModel model = JeepModel.WRANGLER;
         String trim = "Sport";
         String uri =
-                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+                String.format("%s?model=%s&trim=%s", getBaseUriForJeeps(), model, trim);
 //
         System.out.println(uri);
 
@@ -75,11 +73,11 @@ class FetchJeepTest {
     @ParameterizedTest
     @MethodSource("com.promineotech.jeep.FetchJeepTest#parametersForInvalidInput")
     void testThatErrorReturnedWhenInvalidTrimSupplied(String model, String trim, String reason) {
-        System.out.println(getBaseUri());
+        System.out.println(getBaseUriForJeeps());
 
 //        Given: a valid model, trim and URI
         String uri =
-                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+                String.format("%s?model=%s&trim=%s", getBaseUriForJeeps(), model, trim);
 //
         System.out.println(uri);
 
@@ -100,13 +98,13 @@ class FetchJeepTest {
 
     @Test
     void testThatErrorReturnedWhenUnknownTrimSupplied() {
-        System.out.println(getBaseUri());
+        System.out.println(getBaseUriForJeeps());
 
 //        Given: a valid model, trim and URI
         JeepModel model = JeepModel.WRANGLER;
         String trim = "Unknown Trim";
         String uri =
-                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+                String.format("%s?model=%s&trim=%s", getBaseUriForJeeps(), model, trim);
 //
         System.out.println(uri);
 
@@ -153,7 +151,7 @@ class FetchJeepTest {
         JeepModel model = JeepModel.WRANGLER;
         String trim = "Invalid";
         String uri =
-                String.format("%s?model=%s&trim=%s", getBaseUri(), model, trim);
+                String.format("%s?model=%s&trim=%s", getBaseUriForJeeps(), model, trim);
 //
         doThrow(new RuntimeException("Ouch!")).when(jeepSalesService)
                         .fetchJeeps(model, trim);
