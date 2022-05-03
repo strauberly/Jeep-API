@@ -15,6 +15,15 @@ I begin my documentation.
 
 ---
 
+-2 May 2022-
+
+- Created a new integration test
+- Created Order JSON Object
+- Create req and resp objects
+- Test validated with 201 response
+
+---
+
 -1 May 2022-
 
 - Created parameterized test checking for length of input,
