@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.aspectj.bridge.MessageUtil.fail;
+
 import static org.mockito.Mockito.doThrow;
 
 class FetchJeepTest {

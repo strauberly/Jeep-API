@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;

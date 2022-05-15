@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.List;
 
@@ -58,6 +59,6 @@ public interface JeepOrderController {
     )
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    Order createOrder(@RequestBody OrderRequest orderRequest);
+    Order createOrder(@Valid @RequestBody OrderRequest orderRequest);
     }
 
