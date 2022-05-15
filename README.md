@@ -15,6 +15,16 @@ I begin my documentation.
 
 ---
 
+-14 May 2022-
+
+- Created model result set extractors.
+- Made a means for adding on calculated price to order object.
+- Assert that objects were missing their dependency and so was finally able to track it down and now the test can run.
+- Test is currently returning 500 internal server error.
+- Will circle back through lessons now that distraction of why .hasSize() was throwing a fit when nothing else was.
+
+---
+
 -2 May 2022-
 
 - Created a new integration test
