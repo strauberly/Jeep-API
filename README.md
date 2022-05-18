@@ -15,6 +15,15 @@ I begin my documentation.
 
 ---
 
+-18 May 2022-
+
+- Discovered that in pulling methods to separate classes, errors were being caused due to
+duplicate methods returning a default null value instead of the intended method returning a built object.
+- Also located a few typos.
+- Application is now functioning in intended manner and development continues.
+
+---
+
 -14 May 2022-
 
 - Created model result set extractors.

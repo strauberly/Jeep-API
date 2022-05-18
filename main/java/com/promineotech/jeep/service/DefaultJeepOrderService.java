@@ -4,6 +4,7 @@ import com.promineotech.jeep.dao.JeepOrderDao;
 import com.promineotech.jeep.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public class DefaultJeepOrderService implements JeepOrderService{
     @Autowired
     private JeepOrderDao jeepOrderDao;
 
-
+    @Transactional
     @Override
     public Order createOrder(OrderRequest orderRequest) {
         Customer customer = getCustomer(orderRequest);
@@ -37,6 +38,7 @@ public class DefaultJeepOrderService implements JeepOrderService{
         }
 
         return jeepOrderDao.saveOrder(customer, jeep, color, engine, tire, price, options);
+//        match other implementaions
 
     }
 
