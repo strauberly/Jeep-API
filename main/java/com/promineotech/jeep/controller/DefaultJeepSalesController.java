@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RestController
 @Slf4j
-public class BasicJeepSalesController implements JeepSalesController{
+public class DefaultJeepSalesController implements JeepSalesController{
     @Autowired
     private JeepSalesService jeepSalesService;
     @Override

@@ -4,15 +4,15 @@ import com.promineotech.jeep.entity.Order;
 import com.promineotech.jeep.entity.OrderRequest;
 import com.promineotech.jeep.service.JeepOrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-public class BasicJeepOrderController implements  JeepOrderController{
+public class DefaultJeepOrderController implements  JeepOrderController{
 
-    @AutoConfigureOrder
-
+    @Autowired
     private JeepOrderService jeepOrderService;
 
     @Override

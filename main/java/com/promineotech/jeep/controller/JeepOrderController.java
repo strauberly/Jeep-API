@@ -1,8 +1,4 @@
 package com.promineotech.jeep.controller;
-
-import com.promineotech.jeep.Constants;
-import com.promineotech.jeep.entity.Jeep;
-import com.promineotech.jeep.entity.JeepModel;
 import com.promineotech.jeep.entity.Order;
 import com.promineotech.jeep.entity.OrderRequest;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -13,14 +9,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
-import java.util.List;
+
 
 @Validated
 @RequestMapping("/orders")
