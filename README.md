@@ -15,6 +15,15 @@ I begin my documentation.
 
 ---
 
+-9 July 2022-
+
+- Created new test that doenst use tomcat server and configured mock mvc object, create mock multipart file object to hold image, 
+then sent to controller with PK number of jeep.
+- Test was successful indicating file was found.
+- Focus is now on writing and reading image from database.
+
+---
+
 -18 May 2022-
 
 - Discovered that in pulling methods to separate classes, errors were being caused due to

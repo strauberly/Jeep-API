@@ -14,10 +14,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -71,5 +69,11 @@ public interface JeepSalesController {
                           @RequestParam(required = false)
                           String trim);
 
-    }
+
+@PostMapping("/{jeepPK}/image")
+@ResponseStatus(code = HttpStatus.OK)
+    String uploadImage(@RequestParam("image")MultipartFile image,
+                       @PathVariable Long jeepPK);
+
+}
 

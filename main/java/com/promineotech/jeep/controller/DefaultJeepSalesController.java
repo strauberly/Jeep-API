@@ -6,6 +6,7 @@ import com.promineotech.jeep.service.JeepSalesService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 @RestController
@@ -19,4 +20,16 @@ public class DefaultJeepSalesController implements JeepSalesController{
         return jeepSalesService.fetchJeeps(model,trim);
         //    log.info("model={}, trim={}", model, trim);
     }
+
+//    @Override
+//    public String uploadImage(MultipartFile image, Long jeepPK) {
+//        return null;
+//    }
+
+    @Override
+    public String uploadImage(MultipartFile image, Long jeepPK){
+        log.debug("image={}, jeepPK={}", image, jeepPK);
+        return "Success!";
+    }
+
     }
