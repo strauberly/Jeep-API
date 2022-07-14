@@ -71,7 +71,7 @@ public interface JeepSalesController {
 
 
 @PostMapping("/{jeepPK}/image")
-@ResponseStatus(code = HttpStatus.OK)
+@ResponseStatus(code = HttpStatus.CREATED)
     String uploadImage(@RequestParam("image")MultipartFile image,
                        @PathVariable Long jeepPK);
 

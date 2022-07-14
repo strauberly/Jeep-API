@@ -1,5 +1,6 @@
 package com.promineotech.jeep.dao;
 
+import com.promineotech.jeep.entity.Image;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,29 @@ import java.util.Map;
 @Component
 @Slf4j
 @Service
-public class DefaultJeepSalesDao implements JeepSalesDao{
+public class DefaultJeepSalesDao implements JeepSalesDao {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
 
-//    @Transactional//(readOnly = true)
+    @Override
+    public void saveImage(Image image) {
+        String sql = ""
+                + "INSERT INTO images("
+                + "model_fk, image_id, width, height, mime_type, name, data"
+                +") VALUES ("
+                + ":model_fk, :image_id, :width, :height, :mime_type, :name, :data"
+                + ")";
+        Map<String, Object> params = new HashMap<>();
+        params.put("model_fk,", image.getModelFK());
+        params.put("image_id", image.getImageId());
+        params.put("width", image.getWidth());
+        params.put("height", image.getHeight());
+        params.put("name", image.getName());
+        params.put("data", image.getData());
+
+    }
+
+    //    @Transactional//(readOnly = true)
     @Override
     public List<Jeep> fetchJeeps(JeepModel model, String trim) {
         log.debug("DAO: model={}, trim={}", model, trim);
@@ -38,7 +57,7 @@ public class DefaultJeepSalesDao implements JeepSalesDao{
         params.put("model_id", model.toString());
         params.put("trim_level", trim);
 
-        return jdbcTemplate.query(sql, params, new RowMapper<>(){
+        return jdbcTemplate.query(sql, params, new RowMapper<>() {
             @Override
             public Jeep mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return Jeep.builder()
@@ -53,3 +72,5 @@ public class DefaultJeepSalesDao implements JeepSalesDao{
         });
     }
 }
+
+

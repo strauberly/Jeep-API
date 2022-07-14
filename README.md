@@ -17,6 +17,12 @@ I begin my documentation.
 
 -9 July 2022-
 
+- Now that imgae object has been created, have begun work on saving 
+image object to db.
+---
+
+-9 July 2022-
+
 - Created new test that doenst use tomcat server and configured mock mvc object, create mock multipart file object to hold image, 
 then sent to controller with PK number of jeep.
 - Test was successful indicating file was found.
