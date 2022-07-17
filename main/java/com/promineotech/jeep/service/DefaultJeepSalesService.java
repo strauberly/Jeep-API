@@ -2,6 +2,7 @@ package com.promineotech.jeep.service;
 
 import com.promineotech.jeep.dao.JeepSalesDao;
 import com.promineotech.jeep.entity.Image;
+import com.promineotech.jeep.entity.ImageMimeType;
 import com.promineotech.jeep.entity.Jeep;
 import com.promineotech.jeep.entity.JeepModel;
 import lombok.extern.slf4j.Slf4j;
@@ -38,18 +39,16 @@ public String uploadImage(MultipartFile file, Long modelPK) {
                .imageId(imageId)
                .width(bufferedImage.getWidth())
                .height(bufferedImage.getHeight())
+               .mimeType(ImageMimeType.IMAGE_JPEG)
                .name(file.getOriginalFilename())
                .data(toByteArray(bufferedImage, "jpeg"))
                .build();
 
-    JeepSalesDao.saveImage(image);
+    jeepSalesDao.saveImage(image);
     return imageId;
-
    }catch (IOException e){
        throw new UncheckedIOException(e);
    }
-
-        return null;
 }
 
     private byte[] toByteArray(BufferedImage bufferedImage, String renderType) {
