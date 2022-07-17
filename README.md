@@ -15,9 +15,16 @@ I begin my documentation.
 
 ---
 
+-17 July 2022-
+- flesh out service.
+- read image data to a buffered image got width and height and saved to image object.
+- save image object to database.
+- received image id back along with status code of 201 confirming creation and successful test. 
+---
+
 -13 July 2022-
 
-- Now that imgae object has been created, have begun work on saving 
+- Now that image object has been created, have begun work on saving 
 image object to db.
 ---
 

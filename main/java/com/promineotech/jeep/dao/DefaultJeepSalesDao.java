@@ -28,18 +28,21 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
     @Override
     public void saveImage(Image image) {
         String sql = ""
-                + "INSERT INTO images("
+                + "INSERT INTO images ("
                 + "model_fk, image_id, width, height, mime_type, name, data"
                 +") VALUES ("
                 + ":model_fk, :image_id, :width, :height, :mime_type, :name, :data"
                 + ")";
         Map<String, Object> params = new HashMap<>();
-        params.put("model_fk,", image.getModelFK());
+        params.put("model_fk", image.getModelFK());
         params.put("image_id", image.getImageId());
         params.put("width", image.getWidth());
         params.put("height", image.getHeight());
+        params.put("mime_type", image.getMimeType().getMimeType());
         params.put("name", image.getName());
         params.put("data", image.getData());
+
+        jdbcTemplate.update(sql, params);
 
     }
 

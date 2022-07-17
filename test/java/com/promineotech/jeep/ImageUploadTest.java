@@ -29,8 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @Sql(
-        scripts = {"classpath:flyway/migrations/v1.0__Jeep_Schema.sql",
-                "classpath:flyway/migrations/V1.1__Jeep_Data.sql"},
+        scripts = {"classpath:/flyway/migrations/V1.0__Jeep_Schema.sql",
+                "classpath:/flyway/migrations/V1.1__Jeep_Data.sql"},
         config = @SqlConfig(encoding = "utf-8"))
 
 
@@ -39,6 +39,9 @@ public class ImageUploadTest {
      private static final String JEEP_IMAGE = "flyway/Jeep-Nacho-Concept.jpg";
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Test
     void testThatServerCorrectlyReceivesAnImageAndReturnsOKResponse() throws Exception {
@@ -62,6 +65,7 @@ public class ImageUploadTest {
 
             String content = result.getResponse().getContentAsString();
             assertThat(content).isNotEmpty();
+            assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images")).isEqualTo(numRows + 1);
 
         } catch (Exception e) {
             throw new RuntimeException(e);

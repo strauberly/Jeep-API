@@ -7,14 +7,15 @@ import com.promineotech.jeep.entity.JeepModel;
 import java.util.List;
 
 public interface JeepSalesDao {
-    List<Jeep> fetchJeeps(JeepModel model, String trim);
-    void saveImage(Image image) {
-
-    }
+//    static void saveImage(Image image) {
+//    }
 
 //    @param model
 //    @param trim
 //    @return
 
 
+
+    List<Jeep> fetchJeeps(JeepModel model, String trim);
+    void saveImage(Image image);
 }
