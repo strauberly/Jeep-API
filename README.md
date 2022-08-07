@@ -19,6 +19,8 @@ I begin my documentation.
 - Results verified through unit test, uploading an image via postman and calling the image by id through the browser.
 - Starting to feel like project is nearing completion.
 
+---
+
 -17 July 2022-
 - flesh out service.
 - read image data to a buffered image got width and height and saved to image object.
