@@ -18,11 +18,15 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.Fail.fail;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -36,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ImageUploadTest {
 
-     private static final String JEEP_IMAGE = "flyway/Jeep-Nacho-Concept.jpg";
+    private static final String JEEP_IMAGE = "flyway/Jeep-Nacho-Concept.jpg";
     @Autowired
     private MockMvc mockMvc;
 
@@ -45,13 +49,36 @@ public class ImageUploadTest {
 
     @Test
     void testThatServerCorrectlyReceivesAnImageAndReturnsOKResponse() throws Exception {
+        String json = assertImageUpload();
+        String imageId = extractImageId(json);
+        System.out.println("json = " + json);
+        System.out.println("imageId = " + imageId);
+
+        assertImageRetrieval(imageId);
+    }
+
+    private void assertImageRetrieval(String imageId) throws Exception {
+        mockMvc
+                .perform(get("/jeeps/image/" + imageId))
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", "image/jpeg"));
+
+
+    }
+
+    private String extractImageId(String json) {
+        String[] parts = json.substring(1, json.length() - 1).split(":");
+        return parts[1].substring(1, parts[1].length() -1);
+    }
+
+    protected String assertImageUpload() throws IOException, Exception, UnsupportedEncodingException {
         int numRows = JdbcTestUtils.countRowsInTable(jdbcTemplate, "images");
         Resource image = new ClassPathResource(JEEP_IMAGE);
 
-        if(!image.exists()) {
+        if (!image.exists()) {
             fail("Could not find resource %s", JEEP_IMAGE);
         }
-        try(InputStream inputStream = image.getInputStream()){
+        try (InputStream inputStream = image.getInputStream()) {
             MockMultipartFile file = new MockMultipartFile("image", JEEP_IMAGE,
                     MediaType.TEXT_PLAIN_VALUE, inputStream);
 
@@ -66,9 +93,7 @@ public class ImageUploadTest {
             String content = result.getResponse().getContentAsString();
             assertThat(content).isNotEmpty();
             assertThat(JdbcTestUtils.countRowsInTable(jdbcTemplate, "images")).isEqualTo(numRows + 1);
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            return content;
         }
     }
 }

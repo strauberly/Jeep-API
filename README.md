@@ -14,6 +14,10 @@ I begin my documentation.
 ### Thank you for checking out what I am working on!
 
 ---
+-06 Aug 2022-
+- Completed section pertaining to retrieving an image from the database.
+- Results verified through unit test, uploading an image via postman and calling the image by id through the browser.
+- Starting to feel like project is nearing completion.
 
 -17 July 2022-
 - flesh out service.

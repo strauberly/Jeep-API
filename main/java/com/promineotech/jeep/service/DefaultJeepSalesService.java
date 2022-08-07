@@ -17,16 +17,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
 public class DefaultJeepSalesService implements JeepSalesService{
     @Autowired
     private JeepSalesDao jeepSalesDao;
+
+    @Transactional(readOnly = true)
+    @Override
+    public Image retrieveImage(String imageId) {
+
+        return jeepSalesDao.retrieveImage(imageId).orElseThrow(() -> new NoSuchElementException("Could not find image with ID = " + imageId));
+    }
 
     @Transactional
     @Override
@@ -50,6 +54,9 @@ public String uploadImage(MultipartFile file, Long modelPK) {
        throw new UncheckedIOException(e);
    }
 }
+
+
+
 
     private byte[] toByteArray(BufferedImage bufferedImage, String renderType) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
